@@ -1,0 +1,12 @@
+name: EvilSlaughters
+version: 1.0
+author: Thunderkookie15
+main: me.Lucas.EvilSlaughters.Main
+api-version: 1.15
+description: OMG epische empire wand
+
+commands:
+  evilslaughters:
+    aliases:
+      - es
+    description: de command voor nu!

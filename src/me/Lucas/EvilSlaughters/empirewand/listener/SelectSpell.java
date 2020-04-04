@@ -50,7 +50,7 @@ public class SelectSpell implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (p.getInventory().getItemInMainHand().equals(Utils.empireWand())) {
+            if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
                 if (p.hasPermission("evilslaughters.crimsonwand.use")) {
 
                     if (!selectedSpell.containsKey(p.getName())) {
@@ -79,11 +79,11 @@ public class SelectSpell implements Listener {
     }
 
     @EventHandler
-    public void onSpellCast(PlayerInteractEvent e) {
+    public void onCrimsonSpellCast(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR) {
-            if (p.getInventory().getItemInMainHand().equals(Utils.empireWand())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+            if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
                 if (p.hasPermission("evilslaughters.crimsonwand.use")) {
                     for (Map.Entry<String, Integer> spell : selectedSpell.entrySet()) {
                         if (spell.getKey().equals(p.getName())) {
@@ -127,7 +127,7 @@ public class SelectSpell implements Listener {
     public void onFallDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
-            if (p.getInventory().getItemInMainHand().equals(Utils.empireWand())) {
+            if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
                 if (selectedSpell.get(p.getName()) == 4) {
                     if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                         e.setCancelled(true);
@@ -156,7 +156,7 @@ public class SelectSpell implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getInventory().getItemInMainHand().equals(Utils.empireWand())) {
+        if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
             e.setCancelled(true);
         }
     }

@@ -26,7 +26,7 @@ public class FlyCloudCommand extends SubCommand {
         if (p.hasPermission("evilslaughters.flycloud")) {
             if (args.length == 1) {
                 p.sendMessage(Utils.prefix + Utils.chat("Je moet een cloudsoort invullen!"));
-                p.sendMessage(Utils.chat("&7Je kan kiezen uit: Crimson, Warped en Ender"));
+                p.sendMessage(Utils.chat("&7Je kan kiezen uit: &cCrimson,&7 &3Warped&7 of &5Ender&7!"));
                 return;
             }
 

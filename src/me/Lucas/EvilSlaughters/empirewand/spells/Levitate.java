@@ -1,6 +1,7 @@
 package me.Lucas.EvilSlaughters.empirewand.spells;
 
 import me.Lucas.EvilSlaughters.utils.Utils;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -10,7 +11,6 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Levitate {
@@ -31,7 +31,6 @@ public class Levitate {
                 public void run() {
 
                     if (target == null) {
-                        System.out.println("Geen target gevonden!");
                         playerLevitating.remove(p.getName());
                         this.cancel();
                         return;
@@ -42,12 +41,6 @@ public class Levitate {
                         hasStartedLevitation = true;
                     }
 
-                    Location pull = p.getLocation().add(p.getEyeLocation().getDirection().multiply(10));
-
-                    Location location = target.getLocation();
-                    double x = location.getX() - pull.getX();
-                    double y = location.getY() - pull.getY();
-                    double z = location.getZ() - pull.getZ();
                     target.setAllowFlight(true);
                     target.setFlying(true);
 
@@ -61,8 +54,10 @@ public class Levitate {
                     if (!playerLevitating.contains(p.getName())) {
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Levitation gestopt!"));
                         target.setFallDistance(0);
-                        target.setAllowFlight(false);
-                        target.setFlying(false);
+                        if (!target.getGameMode().equals(GameMode.CREATIVE)) {
+                            target.setAllowFlight(false);
+                            target.setFlying(false);
+                        }
                         this.cancel();
                     }
                 }

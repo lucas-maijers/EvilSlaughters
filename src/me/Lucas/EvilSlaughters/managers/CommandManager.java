@@ -1,6 +1,7 @@
 package me.Lucas.EvilSlaughters.managers;
 
 import me.Lucas.EvilSlaughters.Main;
+import me.Lucas.EvilSlaughters.empirewand.commands.FlyCloudCommand;
 import me.Lucas.EvilSlaughters.empirewand.commands.WandCommand;
 import me.Lucas.EvilSlaughters.utils.Utils;
 import org.bukkit.command.Command;
@@ -17,6 +18,7 @@ public class CommandManager implements TabExecutor {
     private Main plugin;
     public String main = "evilslaughters";
     public String wand = "crimsonwand";
+    public String flycloud = "flycloud";
 
     public static ArrayList<String> commandList = new ArrayList<>();
     private ArrayList<SubCommand> commands = new ArrayList<>();
@@ -29,8 +31,10 @@ public class CommandManager implements TabExecutor {
         plugin.getCommand(main).setExecutor(this);
 
         this.commands.add(new WandCommand(plugin));
+        this.commands.add(new FlyCloudCommand(plugin));
 
         commandList.add(wand);
+        commandList.add(flycloud);
     }
 
     @Override

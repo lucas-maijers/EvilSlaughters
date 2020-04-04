@@ -36,6 +36,7 @@ public class SelectSpell implements Listener {
         spells.add("Explosive");
         spells.add("Launch");
         spells.add("Leap");
+        spells.add("Levitate");
         spells.add("Lightning Arrow");
         spells.add("Lightning Storm");
         spells.add("Spark");
@@ -103,12 +104,15 @@ public class SelectSpell implements Listener {
                                     Leap.fireSpell(plugin, p);
                                     break;
                                 case 6:
-                                    LightningArrow.fireCrimsonSpell(plugin, p);
+                                    Levitate.fireCrimsonSpell(plugin, p);
                                     break;
                                 case 7:
-                                    LightningStorm.fireCrimsonSpell(plugin, p);
+                                    LightningArrow.fireCrimsonSpell(plugin, p);
                                     break;
                                 case 8:
+                                    LightningStorm.fireCrimsonSpell(plugin, p);
+                                    break;
+                                case 9:
                                     Spark.fireCrimsonSpell(plugin, p);
                                     break;
                             }

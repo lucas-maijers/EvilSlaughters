@@ -29,14 +29,14 @@ public class Confuse {
         for (int x = target.getBlockX() - 5; x < target.getBlockX() + 5; x++) {
             for (int z = target.getBlockZ() - 7; z < target.getBlockZ() + 7; z++) {
                 for (int y = target.getBlockY(); y < target.getBlockY() + 7; y++) {
-                    w.spawnParticle(Particle.SMOKE_NORMAL, x, y, z, 10, 0, 0, 0, 0.01);
+                    w.spawnParticle(Particle.SMOKE_NORMAL, x, y, z, 2, 0, 0, 0, 0.01);
                 }
             }
         }
         for (Entity t : fw.getNearbyEntities(5, 7, 7)) {
             if (t instanceof Player) {
                 Player plr = ((Player) t).getPlayer();
-                plr.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 15, 3));
+                plr.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 15, 1));
             }
         }
         fw.detonate();

@@ -52,7 +52,7 @@ public class LightningArrow {
                     w.strikeLightning(arrow.getLocation());
                     w.strikeLightning(arrow.getLocation());
                     w.strikeLightning(arrow.getLocation());
-                    w.createExplosion(arrow.getLocation(), (float) 1.5, true, true);
+                    w.createExplosion(arrow.getLocation(), (float) 1.5, true, false);
                     arrow.remove();
                     this.cancel();
                 }

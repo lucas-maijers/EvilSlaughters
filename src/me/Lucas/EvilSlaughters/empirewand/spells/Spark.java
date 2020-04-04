@@ -4,7 +4,9 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.Plugin;
@@ -24,6 +26,13 @@ public class Spark {
 
         fmeta.addEffect(fwEffect);
         fw.setFireworkMeta(fmeta);
+
+        for (Entity e : fw.getNearbyEntities(1, 1, 1)) {
+            if (e instanceof LivingEntity) {
+                ((LivingEntity) e).damage(2);
+            }
+        }
+
         fw.detonate();
 
     }

@@ -20,7 +20,7 @@ public class Launch {
 
         final Firework fw = w.spawn(Launch.getCenter(target), Firework.class);
 
-        for (Entity t : fw.getNearbyEntities(0.5, 1, 0.5)) {
+        for (Entity t : fw.getNearbyEntities(1, 1, 1)) {
             Vector newV = t.getLocation().toVector();
             newV.setX(0);
             newV.setZ(0);

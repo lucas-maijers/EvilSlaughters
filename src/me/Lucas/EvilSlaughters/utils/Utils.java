@@ -13,6 +13,8 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
+    public static String staffChat = prefix + chat("&8[&6&lStaffChat&8] &7");
+
     public static String noPermission = prefix + chat("Jij hebt geen toestemming om dit te gebruiken");
 
     public static ItemStack crimsonWand() {

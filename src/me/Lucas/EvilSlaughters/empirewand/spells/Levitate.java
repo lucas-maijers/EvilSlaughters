@@ -3,22 +3,24 @@ package me.Lucas.EvilSlaughters.empirewand.spells;
 import me.Lucas.EvilSlaughters.utils.Utils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Levitate {
 
-    public static ArrayList<Player> entries = new ArrayList<>();
     private static Set<String> playerLevitating = new HashSet<>();
 
     public static void fireCrimsonSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
         if (!playerLevitating.contains(p.getName())) {
             playerLevitating.add(p.getName());
 
@@ -50,6 +52,11 @@ public class Levitate {
                     target.setFallDistance(0);
                     Vector velocity = wantedLocation.subtract(targetLocation).multiply(0.4);
                     target.setVelocity(velocity);
+
+                    // Particles
+
+                    w.spawnParticle(Particle.SMOKE_LARGE, target.getLocation(), 10, 0, 0, 0, 0.5);
+                    w.spawnParticle(Particle.ENCHANTMENT_TABLE, target.getLocation(), 10, 0.5, 0.5, 0.5, 0.01);
 
                     if (!playerLevitating.contains(p.getName())) {
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Levitation gestopt!"));

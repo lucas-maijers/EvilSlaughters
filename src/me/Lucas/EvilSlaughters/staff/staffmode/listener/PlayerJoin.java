@@ -1,7 +1,9 @@
 package me.Lucas.EvilSlaughters.staff.staffmode.listener;
 
 import me.Lucas.EvilSlaughters.Main;
+import me.Lucas.EvilSlaughters.staff.staffmode.commands.StaffModeCommand;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,6 +35,16 @@ public class PlayerJoin implements Listener {
                     if (!(p.canSee(all))) {
                         p.showPlayer(plugin, all);
                     }
+                }
+            }
+        }
+
+        if (StaffModeCommand.inStaffMode.contains(p.getName())) {
+            if (!(p.getGameMode().equals(GameMode.CREATIVE))) {
+                p.setAllowFlight(true);
+                p.setInvulnerable(true);
+                if (!(p.isOnGround())) {
+                    p.setFlying(true);
                 }
             }
         }

@@ -30,7 +30,7 @@ public class StaffMode {
         Utils.createItem(staffMode, Material.WOODEN_AXE, 1, 3, "&6WorldEdit Wand");
 
         Utils.createItemHead(staffMode, adminHead(p), 1, 8, "&cOnline Staff");
-        Utils.createItem(staffMode, Material.GRAY_DYE, 1, 9, "&7Visible");
+        Utils.createItem(staffMode, Material.GRAY_DYE, 1, 9, "&7Go Visible");
 
         toReturn.setContents(staffMode.getContents());
         return toReturn;

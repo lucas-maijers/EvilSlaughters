@@ -2,11 +2,15 @@ package me.Lucas.EvilSlaughters.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+
+import static org.bukkit.Material.PLAYER_HEAD;
 
 public class Utils {
 
@@ -35,7 +39,7 @@ public class Utils {
         ItemMeta meta = i.getItemMeta();
 
         assert meta != null;
-        meta.setDisplayName(Utils.chat("&7Visible"));
+        meta.setDisplayName(chat("&7Go Visible"));
 
         i.setItemMeta(meta);
         return i;
@@ -46,12 +50,23 @@ public class Utils {
         ItemMeta meta = i.getItemMeta();
 
         assert meta != null;
-        meta.setDisplayName(Utils.chat("&aInvisible"));
+        meta.setDisplayName(chat("&aGo Invisible"));
 
         i.setItemMeta(meta);
         return i;
     }
 
+    public static ItemStack onlineStaff(Player p) {
+        ItemStack i = new ItemStack(PLAYER_HEAD);
+        SkullMeta meta = (SkullMeta) i.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(chat("&cOnline Staff"));
+        meta.setOwningPlayer(p);
+
+        i.setItemMeta(meta);
+        return i;
+    }
 
     public static ItemStack createItem(Inventory inv, Material materialName, int amount, int invSlot, String displayName) {
 

@@ -6,6 +6,7 @@ import me.Lucas.EvilSlaughters.staff.staffmode.inventory.StaffMode;
 import me.Lucas.EvilSlaughters.staff.staffmode.listener.StaffModeEvents;
 import me.Lucas.EvilSlaughters.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +26,7 @@ public class StaffModeCommand extends SubCommand {
     private FileConfiguration cfg;
 
     public static Set<String> inStaffMode = new HashSet<>();
-
-    private List<String> subCommands = new ArrayList<>();
+    public static Set<String> hasHiddenStaff = new HashSet<>();
 
     public StaffModeCommand(Main plugin) {
         this.plugin = plugin;
@@ -58,10 +57,18 @@ public class StaffModeCommand extends SubCommand {
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (!(all.hasPermission("evilslaughters.staff.staffmode"))) {
                         all.hidePlayer(plugin, p);
-
                     }
-                    StaffModeEvents.vanishedPlayers.add(p);
+                    if (hasHiddenStaff.contains(all.getName())) {
+                        all.hidePlayer(plugin, p);
+                    }
                 }
+
+                if (!(p.getGameMode().equals(GameMode.CREATIVE))) {
+                    p.setAllowFlight(true);
+                    p.setHealth(20);
+                    p.setFoodLevel(20);
+                }
+                StaffModeEvents.vanishedPlayers.add(p);
                 inStaffMode.add(p.getName());
                 return;
             }
@@ -71,6 +78,10 @@ public class StaffModeCommand extends SubCommand {
                 restoreInv(p);
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     all.showPlayer(plugin, p);
+                }
+                if (!(p.getGameMode().equals(GameMode.CREATIVE))) {
+                    p.setAllowFlight(false);
+                    p.setFlying(false);
                 }
                 StaffModeEvents.vanishedPlayers.remove(p);
                 inStaffMode.remove(p.getName());

@@ -2,8 +2,11 @@ package me.Lucas.EvilSlaughters.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
 
 public class Utils {
 
@@ -25,5 +28,83 @@ public class Utils {
 
         i.setItemMeta(meta);
         return i;
+    }
+
+    public static ItemStack unvanish() {
+        ItemStack i = new ItemStack(Material.GRAY_DYE);
+        ItemMeta meta = i.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(Utils.chat("&7Visible"));
+
+        i.setItemMeta(meta);
+        return i;
+    }
+
+    public static ItemStack vanish() {
+        ItemStack i = new ItemStack(Material.LIME_DYE);
+        ItemMeta meta = i.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(Utils.chat("&aInvisible"));
+
+        i.setItemMeta(meta);
+        return i;
+    }
+
+
+    public static ItemStack createItem(Inventory inv, Material materialName, int amount, int invSlot, String displayName) {
+
+        ItemStack item;
+
+        item = new ItemStack(materialName, amount);
+
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(Utils.chat(displayName));
+
+        item.setItemMeta(meta);
+        inv.setItem(invSlot - 1, item);
+        return item;
+    }
+
+    public static ItemStack createItemLore(Inventory inv, Material materialName, int amount, int invSlot, String displayName, String... loreString) {
+
+        ItemStack item;
+        ArrayList<String> lore = new ArrayList<>();
+
+        item = new ItemStack(materialName, amount);
+
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(Utils.chat(displayName));
+
+        for (String s : loreString) {
+            lore.add(Utils.chat(s));
+        }
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        inv.setItem(invSlot - 1, item);
+        return item;
+    }
+
+    public static void createItemHead(Inventory inv, ItemStack stackName, int amount, int invSlot, String displayName, String... loreString) {
+        ItemStack item;
+        ArrayList<String> lore = new ArrayList<>();
+
+        item = stackName;
+
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(Utils.chat(displayName));
+
+        for (String s : loreString) {
+            lore.add(Utils.chat(s));
+        }
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        inv.setItem(invSlot - 1, item);
     }
 }

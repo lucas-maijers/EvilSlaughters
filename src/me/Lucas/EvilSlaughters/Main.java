@@ -4,6 +4,9 @@ import me.Lucas.EvilSlaughters.empirewand.listener.SelectSpell;
 import me.Lucas.EvilSlaughters.managers.CommandManager;
 import me.Lucas.EvilSlaughters.managers.ConfigManager;
 import me.Lucas.EvilSlaughters.staff.staffchat.listener.StaffChatMessage;
+import me.Lucas.EvilSlaughters.staff.staffmode.inventory.StaffMode;
+import me.Lucas.EvilSlaughters.staff.staffmode.listener.PlayerJoin;
+import me.Lucas.EvilSlaughters.staff.staffmode.listener.StaffModeEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -23,6 +26,10 @@ public class Main extends JavaPlugin {
 
         new SelectSpell(this);
         new StaffChatMessage(this);
+        new StaffModeEvents(this);
+        new PlayerJoin(this);
+
+        StaffMode.initialize();
     }
 
     @Override

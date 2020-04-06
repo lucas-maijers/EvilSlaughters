@@ -4,6 +4,7 @@ import me.Lucas.EvilSlaughters.Main;
 import me.Lucas.EvilSlaughters.empirewand.commands.FlyCloudCommand;
 import me.Lucas.EvilSlaughters.empirewand.commands.WandCommand;
 import me.Lucas.EvilSlaughters.staff.staffchat.commands.StaffChatCommand;
+import me.Lucas.EvilSlaughters.staff.staffmode.commands.StaffModeCommand;
 import me.Lucas.EvilSlaughters.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,7 @@ public class CommandManager implements TabExecutor {
     public String wand = "crimsonwand";
     public String flycloud = "flycloud";
     public String staffchat = "staffchat";
+    public String staffmode = "staffmode";
 
     public static ArrayList<String> commandList = new ArrayList<>();
     private ArrayList<SubCommand> commands = new ArrayList<>();
@@ -36,10 +38,12 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new WandCommand(plugin));
         this.commands.add(new FlyCloudCommand(plugin));
         this.commands.add(new StaffChatCommand(plugin));
+        this.commands.add(new StaffModeCommand(plugin));
 
         commandList.add(wand);
         commandList.add(flycloud);
         commandList.add(staffchat);
+        commandList.add(staffmode);
     }
 
     @Override

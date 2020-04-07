@@ -40,7 +40,68 @@ public class Confuse {
             }
         }
         fw.detonate();
+    }
 
+    public static void fireWarpedSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+
+        final Firework fw = w.spawn(getCenter(target), Firework.class);
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BURST).withColor(Color.TEAL, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+
+        for (int x = target.getBlockX() - 5; x < target.getBlockX() + 5; x++) {
+            for (int z = target.getBlockZ() - 7; z < target.getBlockZ() + 7; z++) {
+                for (int y = target.getBlockY(); y < target.getBlockY() + 7; y++) {
+                    w.spawnParticle(Particle.SMOKE_NORMAL, x, y, z, 2, 0, 0, 0, 0.01);
+                }
+            }
+        }
+        for (Entity t : fw.getNearbyEntities(5, 7, 7)) {
+            if (t instanceof Player) {
+                Player plr = ((Player) t).getPlayer();
+                plr.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 15, 1));
+            }
+        }
+        fw.detonate();
+    }
+
+    public static void fireEnderSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+
+        final Firework fw = w.spawn(getCenter(target), Firework.class);
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BURST).withColor(Color.PURPLE, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+
+        for (int x = target.getBlockX() - 5; x < target.getBlockX() + 5; x++) {
+            for (int z = target.getBlockZ() - 7; z < target.getBlockZ() + 7; z++) {
+                for (int y = target.getBlockY(); y < target.getBlockY() + 7; y++) {
+                    w.spawnParticle(Particle.SMOKE_NORMAL, x, y, z, 2, 0, 0, 0, 0.01);
+                }
+            }
+        }
+        for (Entity t : fw.getNearbyEntities(5, 7, 7)) {
+            if (t instanceof Player) {
+                Player plr = ((Player) t).getPlayer();
+                plr.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 15, 1));
+            }
+        }
+        fw.detonate();
     }
 
     private static Location getCenter(Location loc) {

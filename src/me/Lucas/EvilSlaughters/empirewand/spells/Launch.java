@@ -38,6 +38,56 @@ public class Launch {
         fw.detonate();
     }
 
+    public static void fireWarpedSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+        final Firework fw = w.spawn(Launch.getCenter(target), Firework.class);
+
+        for (Entity t : fw.getNearbyEntities(1, 1, 1)) {
+            Vector newV = t.getLocation().toVector();
+            newV.setX(0);
+            newV.setZ(0);
+            newV.setY(1.5);
+
+            t.setVelocity(newV);
+        }
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).withColor(Color.TEAL, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+        fw.detonate();
+    }
+
+    public static void fireEnderSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+        final Firework fw = w.spawn(Launch.getCenter(target), Firework.class);
+
+        for (Entity t : fw.getNearbyEntities(1, 1, 1)) {
+            Vector newV = t.getLocation().toVector();
+            newV.setX(0);
+            newV.setZ(0);
+            newV.setY(1.5);
+
+            t.setVelocity(newV);
+        }
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).withColor(Color.PURPLE, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+        fw.detonate();
+    }
+
     private static Location getCenter(Location loc) {
         return new Location(loc.getWorld(),
                 getRelativeCoord(loc.getBlockX()),

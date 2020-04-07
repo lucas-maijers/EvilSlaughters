@@ -34,7 +34,50 @@ public class Spark {
         }
 
         fw.detonate();
+    }
 
+    public static void fireWarpedSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+        final Firework fw = w.spawn(getCenter(target), Firework.class);
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BURST).withColor(Color.TEAL, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+
+        for (Entity e : fw.getNearbyEntities(1, 1, 1)) {
+            if (e instanceof LivingEntity) {
+                ((LivingEntity) e).damage(2);
+            }
+        }
+        fw.detonate();
+    }
+
+    public static void fireEnderSpell(Plugin plugin, Player p) {
+        World w = p.getWorld();
+
+        Location target = p.getTargetBlock(null, 40).getLocation();
+
+        final Firework fw = w.spawn(getCenter(target), Firework.class);
+
+        fw.setSilent(true);
+        FireworkMeta fmeta = fw.getFireworkMeta();
+        FireworkEffect fwEffect = FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BURST).withColor(Color.PURPLE, Color.BLACK).build();
+
+        fmeta.addEffect(fwEffect);
+        fw.setFireworkMeta(fmeta);
+
+        for (Entity e : fw.getNearbyEntities(1, 1, 1)) {
+            if (e instanceof LivingEntity) {
+                ((LivingEntity) e).damage(2);
+            }
+        }
+        fw.detonate();
     }
 
     private static Location getCenter(Location loc) {

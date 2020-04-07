@@ -12,6 +12,8 @@ import java.util.Set;
 
 public class FlyCloud {
     public static Set<String> crimsonCloud = new HashSet<>();
+    public static Set<String> warpedCloud = new HashSet<>();
+    public static Set<String> enderCloud = new HashSet<>();
 
     public static void crimsonFlyCloud(Player p, Plugin plugin) {
         World w = p.getWorld();
@@ -31,6 +33,54 @@ public class FlyCloud {
                     w.spawnParticle(Particle.REDSTONE, p.getLocation(), 5, 0.3, 0.2, 0.3, 0.1, red);
                 }
                 if (!crimsonCloud.contains(p.getName())) {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 1);
+    }
+
+    public static void warpedFlyCloud(Player p, Plugin plugin) {
+        World w = p.getWorld();
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                Particle.DustOptions black = new Particle.DustOptions(Color.BLACK, 1);
+                Particle.DustOptions cyan = new Particle.DustOptions(Color.TEAL, 1);
+
+                if (p.isFlying()) {
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.REDSTONE, p.getLocation(), 5, 0.3, 0.2, 0.3, 0.1, black);
+                    w.spawnParticle(Particle.REDSTONE, p.getLocation(), 5, 0.3, 0.2, 0.3, 0.1, cyan);
+                }
+                if (!warpedCloud.contains(p.getName())) {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 1);
+    }
+
+    public static void enderFlyCloud(Player p, Plugin plugin) {
+        World w = p.getWorld();
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                Particle.DustOptions black = new Particle.DustOptions(Color.BLACK, 1);
+                Particle.DustOptions purple = new Particle.DustOptions(Color.PURPLE, 1);
+
+                if (p.isFlying()) {
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.SPELL_MOB, p.getLocation(), 0, 0.3, 0.3, 0.3, 0.01);
+                    w.spawnParticle(Particle.REDSTONE, p.getLocation(), 5, 0.3, 0.2, 0.3, 0.1, black);
+                    w.spawnParticle(Particle.REDSTONE, p.getLocation(), 5, 0.3, 0.2, 0.3, 0.1, purple);
+                }
+                if (!enderCloud.contains(p.getName())) {
                     this.cancel();
                 }
             }

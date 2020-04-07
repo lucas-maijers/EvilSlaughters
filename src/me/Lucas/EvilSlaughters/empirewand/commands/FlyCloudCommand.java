@@ -4,6 +4,7 @@ import me.Lucas.EvilSlaughters.Main;
 import me.Lucas.EvilSlaughters.empirewand.listener.FlyCloud;
 import me.Lucas.EvilSlaughters.managers.SubCommand;
 import me.Lucas.EvilSlaughters.utils.Utils;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -37,9 +38,44 @@ public class FlyCloudCommand extends SubCommand {
                     FlyCloud.crimsonFlyCloud(p, plugin);
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud aangezet!"));
                 } else {
-                    p.setAllowFlight(false);
-                    p.setFlying(false);
+                    if (!p.getGameMode().equals(GameMode.CREATIVE)) {
+                        p.setFlying(false);
+                        p.setAllowFlight(false);
+                    }
+
                     FlyCloud.crimsonCloud.remove(p.getName());
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud uitgezet!"));
+                }
+            }
+
+            if (args[1].equalsIgnoreCase("warped")) {
+                if (!FlyCloud.warpedCloud.contains(p.getName())) {
+                    p.setAllowFlight(true);
+                    FlyCloud.warpedCloud.add(p.getName());
+                    FlyCloud.warpedFlyCloud(p, plugin);
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud aangezet!"));
+                } else {
+                    if (!p.getGameMode().equals(GameMode.CREATIVE)) {
+                        p.setFlying(false);
+                        p.setAllowFlight(false);
+                    }
+                    FlyCloud.warpedCloud.remove(p.getName());
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud uitgezet!"));
+                }
+            }
+
+            if (args[1].equalsIgnoreCase("ender")) {
+                if (!FlyCloud.enderCloud.contains(p.getName())) {
+                    p.setAllowFlight(true);
+                    FlyCloud.enderCloud.add(p.getName());
+                    FlyCloud.enderFlyCloud(p, plugin);
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud aangezet!"));
+                } else {
+                    if (!p.getGameMode().equals(GameMode.CREATIVE)) {
+                        p.setFlying(false);
+                        p.setAllowFlight(false);
+                    }
+                    FlyCloud.enderCloud.remove(p.getName());
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt de Crimson Cloud uitgezet!"));
                 }
             }

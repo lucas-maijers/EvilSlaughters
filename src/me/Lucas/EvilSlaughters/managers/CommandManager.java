@@ -22,7 +22,7 @@ public class CommandManager implements TabExecutor {
     private Main plugin;
 
     public String main = "evilslaughters";
-    public String wand = "crimsonwand";
+    public String wand = "wand";
     public String flycloud = "flycloud";
     public String staffchat = "staffchat";
     public String staffmode = "staffmode";
@@ -65,14 +65,14 @@ public class CommandManager implements TabExecutor {
 
         if (cmd.getName().equalsIgnoreCase(main)) {
             if (args.length == 0) {
-                p.sendMessage(Utils.chat("je moet wel iets erachter invullen he"));
+                p.sendMessage(Utils.prefix + Utils.chat("Je moet een geldig subcommando invoeren!"));
                 return true;
             }
 
             SubCommand target = this.get(args[0]);
 
             if (target == null) {
-                p.sendMessage(Utils.chat("je moet wel iets erachter invullen he"));
+                p.sendMessage(Utils.prefix + Utils.chat("Je moet een geldig subcommando invoeren!"));
                 return true;
             }
 

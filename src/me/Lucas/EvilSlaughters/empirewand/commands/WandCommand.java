@@ -35,6 +35,16 @@ public class WandCommand extends SubCommand {
                 p.getInventory().addItem(Utils.crimsonWand());
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &c&lCrimson Wand &7gekregen!"));
             }
+
+            if (args[1].equalsIgnoreCase("warped")) {
+                p.getInventory().addItem(Utils.warpedWand());
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &3&lWarped Wand &7gekregen!"));
+            }
+
+            if (args[1].equalsIgnoreCase("ender")) {
+                p.getInventory().addItem(Utils.enderWand());
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &5&lEnder Wand &7gekregen!"));
+            }
         } else {
             p.sendMessage(Utils.noPermission);
         }

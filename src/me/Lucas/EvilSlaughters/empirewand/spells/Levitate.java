@@ -18,7 +18,7 @@ public class Levitate {
 
     private static Set<String> playerLevitating = new HashSet<>();
 
-    public static void fireCrimsonSpell(Plugin plugin, Player p) {
+    public static void fireSpell(Plugin plugin, Player p) {
         World w = p.getWorld();
 
         if (!playerLevitating.contains(p.getName())) {

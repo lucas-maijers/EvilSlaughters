@@ -28,7 +28,30 @@ public class Utils {
         ItemStack i = new ItemStack(Material.BLAZE_ROD);
         ItemMeta meta = i.getItemMeta();
 
+        assert meta != null;
         meta.setDisplayName(chat("&cCrimson Wand"));
+
+        i.setItemMeta(meta);
+        return i;
+    }
+
+    public static ItemStack warpedWand() {
+        ItemStack i = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta meta = i.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(chat("&3Warped Wand"));
+
+        i.setItemMeta(meta);
+        return i;
+    }
+
+    public static ItemStack enderWand() {
+        ItemStack i = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta meta = i.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(chat("&5Ender Wand"));
 
         i.setItemMeta(meta);
         return i;

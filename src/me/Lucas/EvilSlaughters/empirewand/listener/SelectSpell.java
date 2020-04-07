@@ -50,8 +50,60 @@ public class SelectSpell implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
+            if (p.getInventory().getItemInMainHand().equals(Utils.warpedWand())) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
+
+                    if (!selectedSpell.containsKey(p.getName())) {
+                        selectedSpell.put(p.getName(), 0);
+                    }
+
+                    if (p.isSneaking()) {
+                        if (selectedSpell.get(p.getName()) > 1) {
+                            selectedSpell.replace(p.getName(), selectedSpell.get(p.getName()) - 1);
+                        } else if (selectedSpell.get(p.getName()) == 1) {
+                            selectedSpell.replace(p.getName(), spells.size());
+                        }
+                    } else {
+                        if (selectedSpell.get(p.getName()) < spells.size()) {
+                            selectedSpell.replace(p.getName(), selectedSpell.get(p.getName()) + 1);
+                        } else if (selectedSpell.get(p.getName()) == spells.size()) {
+                            selectedSpell.replace(p.getName(), 1);
+                        }
+                    }
+
+                    p.getWorld().spawnParticle(Particle.SPELL_WITCH, p.getLocation(), 20, 0.3, 0.5, 0.3, 0.1);
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Je hebt de spell &6%s &7geselecteerd!", spells.get(selectedSpell.get(p.getName()) - 1))));
+                }
+            }
+
             if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
-                if (p.hasPermission("evilslaughters.crimsonwand.use")) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
+
+                    if (!selectedSpell.containsKey(p.getName())) {
+                        selectedSpell.put(p.getName(), 0);
+                    }
+
+                    if (p.isSneaking()) {
+                        if (selectedSpell.get(p.getName()) > 1) {
+                            selectedSpell.replace(p.getName(), selectedSpell.get(p.getName()) - 1);
+                        } else if (selectedSpell.get(p.getName()) == 1) {
+                            selectedSpell.replace(p.getName(), spells.size());
+                        }
+                    } else {
+                        if (selectedSpell.get(p.getName()) < spells.size()) {
+                            selectedSpell.replace(p.getName(), selectedSpell.get(p.getName()) + 1);
+                        } else if (selectedSpell.get(p.getName()) == spells.size()) {
+                            selectedSpell.replace(p.getName(), 1);
+                        }
+                    }
+
+                    p.getWorld().spawnParticle(Particle.SPELL_WITCH, p.getLocation(), 20, 0.3, 0.5, 0.3, 0.1);
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Je hebt de spell &6%s &7geselecteerd!", spells.get(selectedSpell.get(p.getName()) - 1))));
+                }
+            }
+
+            if (p.getInventory().getItemInMainHand().equals(Utils.enderWand())) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
 
                     if (!selectedSpell.containsKey(p.getName())) {
                         selectedSpell.put(p.getName(), 0);
@@ -83,8 +135,10 @@ public class SelectSpell implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+
+            // Crimson Wand
             if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
-                if (p.hasPermission("evilslaughters.crimsonwand.use")) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
                     for (Map.Entry<String, Integer> spell : selectedSpell.entrySet()) {
                         if (spell.getKey().equals(p.getName())) {
                             switch (spell.getValue()) {
@@ -104,7 +158,7 @@ public class SelectSpell implements Listener {
                                     Leap.fireSpell(plugin, p);
                                     break;
                                 case 6:
-                                    Levitate.fireCrimsonSpell(plugin, p);
+                                    Levitate.fireSpell(plugin, p);
                                     break;
                                 case 7:
                                     LightningArrow.fireCrimsonSpell(plugin, p);
@@ -120,6 +174,84 @@ public class SelectSpell implements Listener {
                     }
                 }
             }
+
+            // Warped Wand
+            if (p.getInventory().getItemInMainHand().equals(Utils.warpedWand())) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
+                    for (Map.Entry<String, Integer> spell : selectedSpell.entrySet()) {
+                        if (spell.getKey().equals(p.getName())) {
+                            switch (spell.getValue()) {
+                                case 1:
+                                    Comet.fireSpell(plugin, p);
+                                    break;
+                                case 2:
+                                    Confuse.fireWarpedSpell(plugin, p);
+                                    break;
+                                case 3:
+                                    Explosive.fireWarpedSpell(plugin, p);
+                                    break;
+                                case 4:
+                                    Launch.fireWarpedSpell(plugin, p);
+                                    break;
+                                case 5:
+                                    Leap.fireSpell(plugin, p);
+                                    break;
+                                case 6:
+                                    Levitate.fireSpell(plugin, p);
+                                    break;
+                                case 7:
+                                    LightningArrow.fireWarpedSpell(plugin, p);
+                                    break;
+                                case 8:
+                                    LightningStorm.fireWarpedSpell(plugin, p);
+                                    break;
+                                case 9:
+                                    Spark.fireWarpedSpell(plugin, p);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Ender Wand
+            if (p.getInventory().getItemInMainHand().equals(Utils.enderWand())) {
+                if (p.hasPermission("evilslaughters.wand.use")) {
+                    for (Map.Entry<String, Integer> spell : selectedSpell.entrySet()) {
+                        if (spell.getKey().equals(p.getName())) {
+                            switch (spell.getValue()) {
+                                case 1:
+                                    Comet.fireSpell(plugin, p);
+                                    break;
+                                case 2:
+                                    Confuse.fireEnderSpell(plugin, p);
+                                    break;
+                                case 3:
+                                    Explosive.fireEnderSpell(plugin, p);
+                                    break;
+                                case 4:
+                                    Launch.fireEnderSpell(plugin, p);
+                                    break;
+                                case 5:
+                                    Leap.fireSpell(plugin, p);
+                                    break;
+                                case 6:
+                                    Levitate.fireSpell(plugin, p);
+                                    break;
+                                case 7:
+                                    LightningArrow.fireEnderSpell(plugin, p);
+                                    break;
+                                case 8:
+                                    LightningStorm.fireEnderSpell(plugin, p);
+                                    break;
+                                case 9:
+                                    Spark.fireEnderSpell(plugin, p);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -128,6 +260,22 @@ public class SelectSpell implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
+                if (selectedSpell.get(p.getName()) == 4) {
+                    if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                        e.setCancelled(true);
+                    }
+                }
+            }
+
+            if (p.getInventory().getItemInMainHand().equals(Utils.warpedWand())) {
+                if (selectedSpell.get(p.getName()) == 4) {
+                    if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                        e.setCancelled(true);
+                    }
+                }
+            }
+
+            if (p.getInventory().getItemInMainHand().equals(Utils.enderWand())) {
                 if (selectedSpell.get(p.getName()) == 4) {
                     if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                         e.setCancelled(true);
@@ -157,6 +305,14 @@ public class SelectSpell implements Listener {
         Player p = e.getPlayer();
 
         if (p.getInventory().getItemInMainHand().equals(Utils.crimsonWand())) {
+            e.setCancelled(true);
+        }
+
+        if (p.getInventory().getItemInMainHand().equals(Utils.warpedWand())) {
+            e.setCancelled(true);
+        }
+
+        if (p.getInventory().getItemInMainHand().equals(Utils.enderWand())) {
             e.setCancelled(true);
         }
     }

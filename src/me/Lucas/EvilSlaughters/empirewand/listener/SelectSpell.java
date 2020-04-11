@@ -295,10 +295,10 @@ public class SelectSpell implements Listener {
                         arrow.remove();
                     }
                 }
-
             }
         }
     }
+
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {

@@ -92,6 +92,12 @@ public class LightningArrow {
         new BukkitRunnable() {
             @Override
             public void run() {
+
+                if (arrow.isOnGround()) {
+                    arrow.remove();
+                    this.cancel();
+                }
+
                 if (!(arrow.isValid())) {
                     arrow.remove();
                     this.cancel();

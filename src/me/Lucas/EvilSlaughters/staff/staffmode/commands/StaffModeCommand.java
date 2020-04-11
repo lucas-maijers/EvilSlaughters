@@ -44,6 +44,7 @@ public class StaffModeCommand extends SubCommand {
                     for (Player all : Bukkit.getOnlinePlayers()) {
                         all.showPlayer(plugin, p);
                     }
+                    p.setCanPickupItems(true);
                     StaffModeEvents.vanishedPlayers.remove(p);
                     inStaffMode.remove(p.getName());
                     return;
@@ -68,6 +69,7 @@ public class StaffModeCommand extends SubCommand {
                     p.setHealth(20);
                     p.setFoodLevel(20);
                 }
+                p.setCanPickupItems(false);
                 StaffModeEvents.vanishedPlayers.add(p);
                 inStaffMode.add(p.getName());
                 return;
@@ -83,6 +85,7 @@ public class StaffModeCommand extends SubCommand {
                     p.setAllowFlight(false);
                     p.setFlying(false);
                 }
+                p.setCanPickupItems(true);
                 StaffModeEvents.vanishedPlayers.remove(p);
                 inStaffMode.remove(p.getName());
             }

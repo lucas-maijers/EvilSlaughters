@@ -7,18 +7,21 @@ import me.Lucas.EvilSlaughters.staff.staffmode.inventory.StaffMode;
 import me.Lucas.EvilSlaughters.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.block.Barrel;
+import org.bukkit.block.Chest;
+import org.bukkit.block.EnderChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +29,7 @@ import java.util.Set;
 public class StaffModeEvents implements Listener {
 
     private Main plugin;
+    public static Player target;
 
     public static Set<Player> vanishedPlayers = new HashSet<>();
 
@@ -45,6 +49,7 @@ public class StaffModeEvents implements Listener {
                     all.showPlayer(plugin, p);
                 }
                 vanishedPlayers.remove(p);
+                p.setCanPickupItems(true);
                 p.getInventory().setItem(8, Utils.vanish());
                 return;
             }
@@ -59,6 +64,7 @@ public class StaffModeEvents implements Listener {
                         all.hidePlayer(plugin, p);
                     }
                     vanishedPlayers.add(p);
+                    p.setCanPickupItems(false);
                     p.getInventory().setItem(8, Utils.unvanish());
                 }
             }
@@ -73,22 +79,9 @@ public class StaffModeEvents implements Listener {
 
     @EventHandler
     public void onDamageEvent(EntityDamageEvent e) {
-        if (e instanceof Player) {
+        if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (StaffModeCommand.inStaffMode.contains(p.getName())) {
-                e.setCancelled(true);
-                e.setDamage(0.0F);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onDamagedByEntity(EntityDamageByEntityEvent e) {
-        if (e instanceof Player) {
-            Player p = (Player) e.getEntity();
-            if (StaffModeCommand.inStaffMode.contains(p.getName())) {
-                e.setDamage(0.0F);
-                ((Player) e).setLastDamage(0);
                 e.setCancelled(true);
             }
         }
@@ -139,6 +132,16 @@ public class StaffModeEvents implements Listener {
                 if (!(p.getGameMode().equals(GameMode.CREATIVE))) {
                     e.setCancelled(true);
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntityTarget(EntityTargetLivingEntityEvent e) {
+        if (e.getTarget() instanceof Player) {
+            Player p = (Player) e.getTarget();
+            if (StaffModeCommand.inStaffMode.contains(p.getName())) {
+                e.setCancelled(true);
             }
         }
     }
